@@ -9,6 +9,7 @@ def add_lineage_metadata():
     """Add lineage metadata to Data Catalog outside of the pipeline."""
     print("Adding lineage metadata...")
     datacatalog_client = datacatalog_v1.DataCatalogClient()  # Initialize client here
+    print("Data Catalog client initialized:", datacatalog_client)
     # Perform Data Catalog operations here
     pass
 
