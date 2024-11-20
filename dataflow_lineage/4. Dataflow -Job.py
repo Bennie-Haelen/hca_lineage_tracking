@@ -1,6 +1,19 @@
+from google.cloud import datacatalog_v1
+from datetime import datetime
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
-from apache_beam.io.gcp.bigquery import WriteToBigQuery, ReadFromBigQuery
+from apache_beam.io.gcp.bigquery import ReadFromBigQuery, WriteToBigQuery
+import uuid
+
+def add_lineage_metadata():
+    """Add lineage metadata to Data Catalog outside of the pipeline."""
+    print("Adding lineage metadata...")
+    datacatalog_client = datacatalog_v1.DataCatalogClient()  # Initialize client here
+    # Perform Data Catalog operations here
+    pass
+
+# Add lineage metadata outside the pipeline context
+add_lineage_metadata()
 
 # Define the pipeline options
 pipeline_options = PipelineOptions(
@@ -8,33 +21,33 @@ pipeline_options = PipelineOptions(
     project='hca-sandbox',
     region='us-central1',
     temp_location='gs://bennie_bucket_for_dataflow/temp',
-    staging_location='gs://bennie_bucket_for_dataflow/staging'
+    staging_location='gs://bennie_bucket_for_dataflow/staging',
+    service_account_email='sa-hca-hin-automation@hca-sandbox.iam.gserviceaccount.com',
+    save_main_session=True
 )
-
-# Define the BigQuery tables
-facilities_table = 'hca-sandbox.lineage_samples.facilities'
-metrics_table = 'hca-sandbox.lineage_samples.facility_metrics'
-target_table = 'hca-sandbox.lineage_samples.facility_inspection_report'
 
 # Define the Dataflow pipeline
 with beam.Pipeline(options=pipeline_options) as pipeline:
-    # Read data from the facilities table
     facilities = (
         pipeline
-        | 'Read Facilities' >> ReadFromBigQuery(table=facilities_table)
+        | 'Read Facilities' >> ReadFromBigQuery(
+            query="SELECT * FROM `hca-sandbox.lineage_samples.facilities`",
+            use_standard_sql=True
+        )
     )
-    
-    # Read data from the facility metrics table
+
     metrics = (
         pipeline
-        | 'Read Facility Metrics' >> ReadFromBigQuery(table=metrics_table)
+        | 'Read Metrics' >> ReadFromBigQuery(
+            query="SELECT * FROM `hca-sandbox.lineage_samples.facility_metrics`",
+            use_standard_sql=True
+        )
     )
-    
-    # Join the two tables on facility_id
+
     joined_data = (
         {'facilities': facilities, 'metrics': metrics}
-        | 'Join Tables' >> beam.CoGroupByKey()
-        | 'Transform Joined Data' >> beam.FlatMap(lambda row: [
+        | 'Join Data' >> beam.CoGroupByKey()
+        | 'Transform Data' >> beam.FlatMap(lambda row: [
             {
                 'facility_id': row[0],
                 'facility_name': row[1]['facilities'][0]['facility_name'],
@@ -45,10 +58,9 @@ with beam.Pipeline(options=pipeline_options) as pipeline:
             }
         ])
     )
-    
-    # Write the result to the target BigQuery table
+
     joined_data | 'Write to BigQuery' >> WriteToBigQuery(
-        target_table,
+        table='hca-sandbox:lineage_samples.facility_inspection_report',
         schema='facility_id:INTEGER, facility_name:STRING, city:STRING, state:STRING, quality_score:INTEGER, last_inspection_date:DATE',
         write_disposition=beam.io.gcp.bigquery.BigQueryDisposition.WRITE_TRUNCATE
     )
