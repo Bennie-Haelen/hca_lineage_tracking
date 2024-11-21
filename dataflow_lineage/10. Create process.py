@@ -1,7 +1,7 @@
 import requests
-from google.auth.transport.requests import Request
-from google.oauth2 import id_token
+
 from google.auth import default
+from google.auth.transport.requests import Request
 
 # Set variables
 PROJECT_ID = "hca-sandbox"
