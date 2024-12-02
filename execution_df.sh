@@ -20,4 +20,12 @@
 python /Users/rahul.vangala/sada_projects/HCA/hca_lineage_tracking/dataflow_lineage/dataflow_gcs_2.py \
     --worker_zone=us-central1-a \
     --no_use_public_ips \
-    --experiments=use_network_tags=dataflow
+    --experiments=use_network_tags=dataflow \
+    --service_account="lineage-sand@hca-sandbox.iam.gserviceaccount.com"
+
+
+python /Users/rahul.vangala/sada_projects/HCA/hca_lineage_tracking/dataflow_lineage/dataflow_gcs_3.py \
+    --worker_zone=us-central1-a \
+    --no_use_public_ips \
+    --experiments=use_network_tags=dataflow \
+    --service_account="lineage-sand@hca-sandbox.iam.gserviceaccount.com"

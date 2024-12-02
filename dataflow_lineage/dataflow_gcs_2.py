@@ -23,7 +23,7 @@ pipeline_options = PipelineOptions(
     region='us-central1',
     temp_location='gs://bennie_bucket_for_dataflow/temp',
     staging_location='gs://bennie_bucket_for_dataflow/staging',
-    # service_account_email='sa-hca-hin-automation@hca-sandbox.iam.gserviceaccount.com',
+    service_account_email='lineage-sand@hca-sandbox.iam.gserviceaccount.com',
     # save_main_session=True
 )
 
