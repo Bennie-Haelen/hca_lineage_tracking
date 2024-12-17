@@ -13,6 +13,6 @@ SELECT
         ELSE 'Other'
     END AS region
 FROM
-    hca-sandbox.lineage_samples.source_facilities
+    `hca-sandbox.lineage_samples.source_facilities`
 WHERE
     LOWER(facility_type) LIKE '%hospital%';

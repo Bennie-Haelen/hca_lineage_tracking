@@ -1,5 +1,5 @@
 -- Insert data into the source table
-INSERT INTO hca - sandbox.lineage_samples.source_facilities (
+INSERT INTO `hca-sandbox.lineage_samples.source_facilities` (
     facility_id,
     facility_name,
     facility_type,

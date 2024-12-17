@@ -1,0 +1,19 @@
+{
+  "lineageEvents": [
+    {
+      "name": "projects/624374607135/locations/us/processes/08befbf89bf35f68c4d29cc721fa5a64/runs/7b35d6080fda31ff494aa6b7a607e807/lineageEvents/aafd95c9f165306c7a83f3ba0a581761",
+      "startTime": "2024-12-17T16:32:48.343Z",
+      "endTime": "2024-12-17T16:32:49.954Z",
+      "links": [
+        {
+          "source": {
+            "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.source_facilities"
+          },
+          "target": {
+            "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.target_hospitals"
+          }
+        }
+      ]
+    }
+  ]
+}
