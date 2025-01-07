@@ -1,0 +1,19 @@
+{
+  "lineageEvents": [
+    {
+      "name": "projects/624374607135/locations/us/processes/7c494c3e955705b453d5c3f41673b50c/runs/f91f816fc022862f8b9d6ec70aca9548/lineageEvents/7b218f89e29cbe4a588944815a9bb520",
+      "startTime": "2024-11-21T01:56:33.835Z",
+      "endTime": "2024-11-21T01:56:35.360Z",
+      "links": [
+        {
+          "source": {
+            "fullyQualifiedName": "gcs:bennie_bucket_for_dataflow.`temp/bq_load/92c3981107df40488d866e331dab33ed/hca-sandbox.lineage_samples.facility_inspection_report/1b1e0a17-4e90-4998-a71d-e8830e933bfd`"
+          },
+          "target": {
+            "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_inspection_report"
+          }
+        }
+      ]
+    }
+  ]
+}

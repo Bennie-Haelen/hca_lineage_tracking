@@ -1,0 +1,119 @@
+[
+    [
+      {
+        "name": "projects/624374607135/locations/us/processes/44cc0c7e-a8fb-4931-a7d1-a9ef08e9b5e8/runs/9c944ef8-29b6-46aa-8e0d-3a6c1e2d9a12/lineageEvents/34b2e693-8e46-4304-9fba-54391cf1fc87",    
+        "startTime": "2024-12-19T14:14:11.238Z",
+        "endTime": "2024-12-19T14:14:21.238Z",
+        "links": [
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            }
+          },
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            }
+          }
+        ]
+      },
+      {
+        "name": "projects/624374607135/locations/us/processes/44cc0c7e-a8fb-4931-a7d1-a9ef08e9b5e8/runs/9c944ef8-29b6-46aa-8e0d-3a6c1e2d9a12/lineageEvents/80a60acc-5093-4924-90f8-12d0b91f14fa",    
+        "startTime": "2024-12-19T14:14:11.238Z",
+        "endTime": "2024-12-19T14:14:21.238Z",
+        "links": [
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            }
+          },
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            }
+          }
+        ]
+      },
+      {
+        "name": "projects/624374607135/locations/us/processes/44cc0c7e-a8fb-4931-a7d1-a9ef08e9b5e8/runs/9c944ef8-29b6-46aa-8e0d-3a6c1e2d9a12/lineageEvents/a5ae0ad4-f43d-41b9-ba9c-884c6502c7ab",    
+        "startTime": "2024-12-19T14:14:11.238Z",
+        "endTime": "2024-12-19T14:14:21.238Z",
+        "links": [
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            }
+          },
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            }
+          }
+        ]
+      },
+      {
+        "name": "projects/624374607135/locations/us/processes/44cc0c7e-a8fb-4931-a7d1-a9ef08e9b5e8/runs/9c944ef8-29b6-46aa-8e0d-3a6c1e2d9a12/lineageEvents/ab724560-98a1-4839-b960-a67bac2e8c8d",    
+        "startTime": "2024-12-19T14:14:11.238Z",
+        "endTime": "2024-12-19T14:14:21.238Z",
+        "links": [
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            }
+          },
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            }
+          }
+        ]
+      },
+      {
+        "name": "projects/624374607135/locations/us/processes/44cc0c7e-a8fb-4931-a7d1-a9ef08e9b5e8/runs/9c944ef8-29b6-46aa-8e0d-3a6c1e2d9a12/lineageEvents/d30fddb6-7b5d-4191-b089-241b28ff323d",    
+        "startTime": "2024-12-19T14:14:11.238Z",
+        "endTime": "2024-12-19T14:14:21.238Z",
+        "links": [
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_inspection_report_nb"
+            }
+          },
+          {
+            "source": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_nb"
+            },
+            "target": {
+              "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_inspection_report_nb"
+            }
+          }
+        ]
+      }
+    ]
+  ]

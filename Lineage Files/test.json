@@ -1,0 +1,23 @@
+{
+    "name": "projects/624374607135/locations/us/processes/073988c1-8227-4bc4-9650-ce6f898c65ad/runs/5086b97f-7045-4205-a25a-12b72e03b188/lineageEvents/223f2a8c-fd4c-4492-8991-b620e265def2",
+    "startTime": "2025-01-07T01:41:44.107Z",
+    "endTime": "2025-01-07T01:43:44.107Z",
+    "links": [
+      {
+        "source": {
+          "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facilities_virtnb"
+        },
+        "target": {
+          "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_inspection_report_virtnb"
+        }
+      },
+      {
+        "source": {
+          "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_metrics_virtnb"
+        },
+        "target": {
+          "fullyQualifiedName": "bigquery:hca-sandbox.lineage_samples.facility_inspection_report_virtnb"
+        }
+      }
+    ]
+  }

@@ -9,13 +9,24 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Lineage Management CLI")
     parser.add_argument("--project_id", required=True, help="GCP Project ID")
     parser.add_argument("--location_id", required=True, help="GCP Location ID")
-    parser.add_argument("--process_id", required=True, help="Lineage Process ID")
-    parser.add_argument("--run_id", required=True, help="Lineage Run ID")
-    parser.add_argument("--lineage_event_id", required=True, help="Lineage Event ID")
-    parser.add_argument("--output_file_name", required=True, help="Output file name for results")
+    parser.add_argument("--dataset_id", required=False, help="Dataset ID")
+    parser.add_argument("--table_id", required=False, help="Table ID")
+    parser.add_argument("--process_id", required=False, help="Lineage Process ID")
+    parser.add_argument("--run_id", required=False, help="Lineage Run ID")
+    parser.add_argument("--lineage_event_id", required=False, help="Lineage Event ID")
+    parser.add_argument("--output_file_name", required=False, help="Output file name for results")
     parser.add_argument("--action", required=True, choices=[
-        "create_process", "create_run", "create_lineage", "show_lineage", "delete_lineage"],
-        help="Action to perform: create_process, create_run, create_lineage, show_lineage, or delete_lineage")
+        "create_process", 
+        "create_run", 
+        "create_lineage", 
+        "show_lineage", 
+        "delete_lineage", 
+        "delete_all_target_lineage",
+        "show_target_lineage", 
+        'show_source_lineage',
+        'retrieve_processes_for_link',
+        "retrieve_runs_for_process"],
+        help="Action to perform: create_process, create_run, create_lineage, show_lineage, show_source_lineage, show_target_lineage, delete_lineage, retrieve_processes_for_link, or delete_all_target_lineage")
     return parser.parse_args()
 
 def print_pretty_json(data):
@@ -42,47 +53,53 @@ if __name__ == "__main__":
 
             output_file = f"{ os.getcwd()}/Lineage Files/{project_id}-{location_id}-{process_id}-{run_id}.json"
             print(f"Output File: {output_file}")
-            status_code, lineage_events = \
-                lineage.ShowLineageEvents(process_id=process_id, run_id=run_id, output_file_path=output_file)
+            status_code, lineage_events = lineage.ShowLineageEvents(process_id=process_id, run_id=run_id, output_file_path=output_file)
             
             if status_code == 200:
-                print("Lineage Events:", print_pretty_json(lineage_events))
+                print(f"status: code: {status_code}")
             else:
                 print("Error:", status_code)
+
+
+        case "show_target_lineage":
+            dataset_id = arguments.dataset_id
+            table_id = arguments.table_id
+
+            status_code, links = lineage.SearchTargetLineage(dataset_id, table_id)
+            print_pretty_json(links)
+
+        case "show_source_lineage":
+            dataset_id = arguments.dataset_id
+            table_id = arguments.table_id
+
+            status_code, links = lineage.SearchSourceLineage(dataset_id, table_id)
+            print_pretty_json(links)
+
+        case "delete_lineage":
+            process_id = arguments.process_id
+            run_id = arguments.run_id
+            lineage_event_id = arguments.lineage_event_id
+
+            status_code, response = lineage.DeleteLineageEvent(process_id=process_id, run_id=run_id, lineage_event_id=lineage_event_id)
+            print(f"Delete Event Status: {status_code}, Response: {response}")
+
+        case "delete_all_target_lineage":
+            dataset_id = arguments.dataset_id
+            table_id = arguments.table_id
+
+            status_code, response = lineage.delete_all_target_lineage(project_id=project_id, dataset_id=dataset_id, table_id=table_id)
+            # print(f"Delete All Target Lineage Status: {status_code}, Response: {response}")
+
+        case "retrieve_processes_for_link":
+            link_name = "projects/624374607135/locations/us/links/p:9e3bba03f847d8fe00729c7f6ff841c2"
+            process = lineage.RetrieveProcessForLink(link_name)
+            print(f"Process: {process}")
+
+        case "retrieve_runs_for_process":
+            process_id = "f70e6f72-b1b0-423a-84c3-8fb3347cbac3"
+            runs = lineage.RetrieveAllRunsForProcess(process_id)
+            print_pretty_json(runs)
 
         case _:
             raise ValueError(f"Invalid action: {arguments.action}")
             
-    # process_id = "08befbf89bf35f68c4d29cc721fa5a64"
-    # run_id = "7b35d6080fda31ff494aa6b7a607e807"
-       
-    
-
-
-    # # Create a process
-    # process_response = lineage.CreateLineageProcess(process_id="process1", display_name="Sample Process")
-    # print("Create Process Response:", process_response)
-
-    # # Create a run
-    # run_response = lineage.CreateLineageRun(process_id
-    # ="process1", run_id="run1", start_time="2024-06-18T00:00:00Z")
-    # print("Create Run Response:", run_response)
-
-    # # Create an event
-    # event_response = lineage.CreateLineageEvent(process_id="process1", run_id="run1", event_id="event1", event_type="START", asset_name="sample_asset")
-    # print("Create Event Response:", event_response)
-
-    # Show lineage events
-    # output_file = f"{ os.getcwd()}/Lineage Files/{project_id}-{location_id}-{process_id}-{run_id}.json"
-    # print(f"Output File: {output_file}")
-    # status_code, lineage_events = \
-    #     lineage.ShowLineageEvents(process_id=process_id, run_id=run_id, output_file_path=output_file)
-    
-    # if status_code == 200:
-    #     print("Lineage Events:", print_pretty_json(lineage_events))
-    # else:
-    #     print("Error:", status_code)
-
-    # # Delete an event
-    # delete_status, delete_text = lineage.DeleteLineageEvent(process_id="process1", run_id="run1", event_id="event1")
-    # print(f"Delete Event Status: {delete_status}, Response: {delete_text}")
